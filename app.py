@@ -6,12 +6,12 @@ import pypdf
 
 st.set_page_config(page_title="SAP PO Confirmation & ME2A Tracker", layout="wide")
 
-st.title("📦 SAP Purchase Order Confirmation & Exception Tracker")
+st.title("SAP Purchase Order Confirmation & Exception Tracker")
 st.write("Extract supplier confirmations, process ME2A delinquent acknowledgment follow-ups, and flag SAP PO discrepancies automatically.")
 
 # Sidebar Configuration
 with st.sidebar:
-    st.header("⚙️ Configuration")
+    st.header("Configuration")
     api_key = st.text_input("Enter OpenAI API Key:", type="password")
     st.markdown("---")
     st.subheader("SAP Processing Criteria")
@@ -67,7 +67,7 @@ else:
         for page in pdf_reader.pages:
             raw_text += page.extract_text() or ""
 
-if st.button("🚀 Process & Map to SAP ME2A Tracker"):
+if st.button("Process & Map to SAP ME2A Tracker"):
     if not api_key:
         st.error("Please enter your OpenAI API key in the sidebar.")
     elif not raw_text.strip():
@@ -90,7 +90,7 @@ if st.button("🚀 Process & Map to SAP ME2A Tracker"):
                 col3.metric("Flagged Exceptions (ME2A Action)", len(exceptions), delta_color="inverse")
                 
                 # Full Extracted Table
-                st.subheader("📋 Extracted SAP Line-Item Status Table")
+                st.subheader("Extracted SAP Line-Item Status Table")
                 st.dataframe(df, use_container_width=True)
                 
                 # Exception Callout Box
@@ -104,7 +104,7 @@ if st.button("🚀 Process & Map to SAP ME2A Tracker"):
                 # Export Button
                 csv_data = df.to_csv(index=False).encode("utf-8")
                 st.download_button(
-                    label="📥 Download SAP Status File (CSV)",
+                    label="Download SAP Status File (CSV)",
                     data=csv_data,
                     file_name="sap_po_me2a_status_update.csv",
                     mime="text/csv"
