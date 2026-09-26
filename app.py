@@ -228,6 +228,7 @@ with tab_exception:
             "Item Description",
         ]],
         use_container_width=True,
+        hide_index=True,
     )
 
     st.divider()
@@ -272,7 +273,7 @@ Purchasing Department"""
 # --- TAB 3: ALL ORDERS & EXPORT REPORT ---
 with tab_all:
   st.subheader("Complete Order Register")
-  st.dataframe(df, use_container_width=True)
+  st.dataframe(df, use_container_width=True,hide_index=True)
 
   # Downloadable CSV Report
   if not df.empty:
